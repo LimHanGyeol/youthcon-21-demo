@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Service
 public class FirstService {
 
@@ -20,10 +22,18 @@ public class FirstService {
     public String sendSecond() {
         log.info("send: first service");
 
-        final String requestUrl = SECOND_SERVICE_PATH + "/receive";
+        String requestUrl = getRandomSecondServiceUrl();
         String response = restTemplate.getForObject(requestUrl, String.class);
 
         log.info("receive: response - {}", response);
         return "finished first service";
+    }
+
+    private String getRandomSecondServiceUrl() {
+        int result = ThreadLocalRandom.current().nextInt(1, 10) + 1;
+        if (result <= 5) {
+            return SECOND_SERVICE_PATH + "/failure";
+        }
+        return SECOND_SERVICE_PATH + "/receive";
     }
 }
