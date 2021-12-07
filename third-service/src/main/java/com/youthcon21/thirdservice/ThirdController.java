@@ -14,6 +14,6 @@ public class ThirdController {
     @GetMapping("/receive")
     public ResponseEntity<String> receive() {
         log.info("<--- Third Service Receive");
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Third Service Finished");
     }
 }
