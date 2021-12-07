@@ -10,9 +10,19 @@ public class FirstController {
 
     private static final Logger log = LoggerFactory.getLogger(FirstController.class);
 
-    @GetMapping("/first")
+    private final FirstService firstService;
+
+    public FirstController(FirstService firstService) {
+        this.firstService = firstService;
+    }
+
+    @GetMapping("/send")
     public String callSecond() {
-        log.info("---> GET Second Service");
-        return "second";
+        log.info("---> GET /second-service/receive");
+
+        String result = firstService.sendSecond();
+
+        log.info("---> END First Service, result: {}", result);
+        return result;
     }
 }
