@@ -12,14 +12,21 @@ public class SecondController {
 
     private static final Logger log = LoggerFactory.getLogger(SecondController.class);
 
+    private final SecondService secondService;
+
+    public SecondController(SecondService secondService) {
+        this.secondService = secondService;
+    }
+
     @GetMapping("/receive")
-    public ResponseEntity<Integer> receive() {
+    public ResponseEntity<String> receive() {
         log.info("<--- Second Service Receive");
-        return ResponseEntity.ok().build();
+        String result = secondService.sendThird();
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/failure")
-    public ResponseEntity<Integer> failure() {
+    public ResponseEntity<String> failure() {
         log.info("<--- Second Service Failure");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
