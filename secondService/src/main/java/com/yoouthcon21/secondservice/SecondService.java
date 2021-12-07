@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class SecondService {
 
     private static final Logger log = LoggerFactory.getLogger(SecondService.class);
-    private static final String THIRD_SERVICE_PATH = "http://localhost:8082/thrid-service";
+    private static final String THIRD_SERVICE_PATH = "http://localhost:8082/third-service";
 
 
     private final RestTemplate restTemplate;
