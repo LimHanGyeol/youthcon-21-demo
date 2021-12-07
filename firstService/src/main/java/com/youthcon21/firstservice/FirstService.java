@@ -31,6 +31,7 @@ public class FirstService {
 
     private String getRandomSecondServiceUrl() {
         int result = ThreadLocalRandom.current().nextInt(1, 10) + 1;
+        log.info("result: {}", result);
         if (result <= 5) {
             return SECOND_SERVICE_PATH + "/failure";
         }
